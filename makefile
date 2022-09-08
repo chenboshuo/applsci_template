@@ -7,6 +7,7 @@ all: article
 article: build
 	pdflatex -output-directory="./build" main.tex
 	bibtex ./build/main
+	makeglossaries -d ./build/ main
 	pdflatex -output-directory="./build" main.tex
 	pdflatex -output-directory="./build" main.tex
 

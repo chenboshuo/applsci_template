@@ -1,0 +1,28 @@
+% Load the package with the acronym option
+\RequirePackage[acronym,nomain]{glossaries}
+% % symbol list
+% \RequirePackage[acronym]{glossaries-extra}
+
+% Generate the glossary
+\makeglossaries
+
+\newglossarystyle{officalAbbrivationStyle}{%
+  \setglossarystyle{long}
+  \renewenvironment{theglossary}{% Change the table type --> 3 columns
+    \noindent
+    The following abbreviations are used in this manuscript:\\
+
+    \noindent
+    \begin{tabular}{@{}ll}%
+  }{
+    \end{tabular}
+  }%
+  %
+  \renewcommand*{\glossentry}[2]{%  Change the displayed items
+    \glstarget{##1}{\glossentryname{##1}} %
+    & \glossentrydesc{##1}% Description
+    \\
+  }%
+  \renewcommand*{\glsgroupheading}[1]{}%
+  \renewcommand*{\glsgroupskip}{}%
+}
