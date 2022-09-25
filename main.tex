@@ -6,7 +6,7 @@
 % LaTeX version, and LaTeX editor.
 
 %=================================================================
-\documentclass[journal,article,submit,pdftex,moreauthors]{settings/mdpi}
+\documentclass[journal,article,submit,moreauthors]{settings/mdpi}
 % For posting an early version of this manuscript as a preprint, 
 % you may use "preprints" as the journal and 
 % change "submit" to "accept". The document class line would be, 
@@ -58,11 +58,13 @@
 \input{info.tex}
 \input{sections/abstract}
 \usepackage{settings/abbrivation}
+\usepackage{settings/ChineseDraft}
 
 \usepackage{subfiles}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
+	\zhEn{zh}{en}
 	\input{instructions.tex} % the officical help text.
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

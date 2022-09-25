@@ -1,0 +1,89 @@
+\RequirePackage{ifdraft}
+\ifdraft{%
+    \RequirePackage{ctex}
+}{}
+\RequirePackage{paracol}
+\RequirePackage{todonotes}
+\ifdraft{
+  \fancyhead[C]{Draft \vspace{0.2cm}}
+  \renewcommand{\headrulewidth}{1pt}
+  \newcommand{\upcite}[1]{$^{\mbox{\scriptsize \cite{#1}}}$}
+}{}
+
+% added text command
+% for formal definitions
+\RequirePackage{framed}
+\providebool{isAddedContent}
+\boolfalse{isAddedContent}
+% environment derived from framed.sty: see leftbar environment definition
+\definecolor{addedShade}{rgb}{0.82, 0.95, 0.87}
+\definecolor{addedMark}{rgb}{0.16, 0.34, 0.32}
+
+\newenvironment{addedBox}{%
+  \def\FrameCommand{%
+    \hspace{1pt}%
+    {\color{addedMark}\vrule width 2pt}%
+    {\color{addedShade}\vrule width 4pt}%
+    \colorbox{addedShade}%
+  }%
+  \MakeFramed{\advance\hsize-\width\FrameRestore}%
+  \noindent\hspace{-4.55pt}% disable indenting first paragraph
+  \begin{adjustwidth}{}{7pt}%
+  \vspace{2pt}\vspace{2pt}%
+}{%
+  \vspace{2pt}\end{adjustwidth}\endMakeFramed%
+}
+\newcommand{\DIFaddbegin}{\booltrue{isAddedContent}} %DIF PREAMBLE
+\newcommand{\DIFaddend}{\boolfalse{isAddedContent}} %DIF PREAMBLE
+
+% deleted text command
+\providebool{isDeletedContent}
+\boolfalse{isDeletedContent}
+% environment derived from framed.sty: see leftbar environment definition
+\definecolor{deletedShade}{rgb}{0.92, 0.62, 0.69}
+\definecolor{deletedMark}{rgb}{0.62, 0.12, 0.19}
+
+\newenvironment{deletedBox}{%
+  \def\FrameCommand{%
+    \hspace{1pt}%
+    {\color{deletedMark}\vrule width 2pt}%
+    {\color{deletedShade}\vrule width 4pt}%
+    \colorbox{deletedShade}%
+  }%
+  \MakeFramed{\advance\hsize-\width\FrameRestore}%
+  \noindent\hspace{-4.55pt}% disable indenting first paragraph
+  \begin{adjustwidth}{}{7pt}%
+  \vspace{2pt}\vspace{2pt}%
+}{%
+  \vspace{2pt}\end{adjustwidth}\endMakeFramed%
+}
+\newcommand{\DIFdelbegin}{\booltrue{isDeletedContent}} %DIF PREAMBLE
+\newcommand{\DIFdelend}{\boolfalse{isDeletedContent}} %DIF PREAMBLE
+
+\newcommand{\zhEn}[2]{%
+  \ifdraft{%
+    \ifx\hfuzz#2\hfuzz%
+      \todo[color=yellow!30,inline]{#1}%
+    \else%
+      \begin{paracol}{2}%
+        \ifbool{isAddedContent}{
+          \begin{addedBox}
+        }{}%
+        \ifbool{isDeletedContent}{
+          \begin{deletedBox}
+        }{}%
+        #2%
+        \ifbool{isAddedContent}{
+          \end{addedBox}
+        }{}%
+        \ifbool{isDeletedContent}{
+          \end{deletedBox}
+        }{}%
+      \switchcolumn%
+        #1%
+      \end{paracol}%
+    \fi%
+  }{%
+    #2%
+  }%
+}
