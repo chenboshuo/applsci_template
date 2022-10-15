@@ -4,8 +4,9 @@
 }{}
 \RequirePackage{paracol}
 \RequirePackage{todonotes}
+\RequirePackage{scrtime}
 \ifdraft{
-  \fancyhead[C]{Draft \vspace{0.2cm}}
+  \fancyhead[C]{Draft (\today \thistime) \vspace{0.2cm}}
   \renewcommand{\headrulewidth}{1pt}
   \newcommand{\upcite}[1]{$^{\mbox{\scriptsize \cite{#1}}}$}
 }{}
