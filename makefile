@@ -24,7 +24,7 @@ build/%.pdf: %.tex build
 
 
 draft.tex : build
-	echo "\documentclass[journal,article,submit,moreauthors,draft]{settings/mdpi}" > draft.tex
+	echo "\documentclass[journal,article,accept,moreauthors,draft]{settings/mdpi}" > draft.tex
 	awk 'FNR>57' main.tex >> draft.tex
 
 article.tex : build
